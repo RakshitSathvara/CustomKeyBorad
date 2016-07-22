@@ -4,7 +4,7 @@
 
 
 
-    <uses-permission-sdk-23  android:name="android.permission.BIND_INPUT_METHOD"/>
+    <uses-permission android:name="android.permission.BIND_INPUT_METHOD"/>
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,7 @@
             android:smallScreens="true"
             android:anyDensity="true"/>
 
-        <service android:name="SimpleIME">
+        <service android:name="SimpleIME" android:permission="android.permission.BIND_INPUT_METHOD">
 
             <intent-filter>
                 <action android:name="android.view.InputMethod"/>

@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">CustomKeyBorad</string>
     <string name="subtype_en_US">English (US)</string>
+
+    <string name="button_description">Emoticons Button</string>
+    <string name="chat_hint">Enter text here</string>
+    <string name="post">Post</string>
+    <string name="back">Back</string>
+    <string name="label_keyboard_key_go">Go</string>
+    <string name="label_keyboard_key_send">Send</string>
+    <string name="label_keyboard_key_next">Next</string>
 </resources>
