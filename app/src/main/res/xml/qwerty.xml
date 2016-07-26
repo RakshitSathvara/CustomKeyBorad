@@ -149,7 +149,7 @@
             android:codes="47"
             android:keyIcon="@mipmap/ic_launcher"
             android:keyWidth="15%p"
-            android:popupKeyboard="@xml/qwerty" />
+            android:popupKeyboard="@xml/emoji_a2" />
         <Key
             android:codes="32"
             android:isRepeatable="true"

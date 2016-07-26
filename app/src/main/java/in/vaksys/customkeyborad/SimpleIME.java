@@ -18,12 +18,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputConnection;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -46,6 +44,7 @@ public class SimpleIME extends InputMethodService
 
     InputStream ims = null;
     View view;
+    private static InputConnection ic;
 
     @Override
     public View onCreateInputView() {
@@ -82,6 +81,7 @@ public class SimpleIME extends InputMethodService
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
         InputConnection ic = getCurrentInputConnection();
+        Log.e("PRIMARY CODE", "onKey: " + primaryCode);
         playClick(primaryCode);
         switch (primaryCode) {
             case Keyboard.KEYCODE_DELETE:
@@ -102,11 +102,59 @@ public class SimpleIME extends InputMethodService
                 break;
 
             case 47:
-               // Toast.makeText(SimpleIME.this, "Hello Emoji", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(SimpleIME.this, "Hello Emoji", Toast.LENGTH_SHORT).show();
 
-                keyboard = new Keyboard(this, R.xml.emoji_a2);
+
+                keyboard = new Keyboard(this, R.layout.keyboard_main);
                 kv.setKeyboard(keyboard);
-                this.kv.setShifted(false);
+                kv.setShifted(true);
+                kv.setOnKeyboardActionListener(this);
+
+
+
+               /* kv.setOnKeyboardActionListener(new KeyboardView.OnKeyboardActionListener() {
+                    @Override
+                    public void onPress(int primaryCode) {
+
+                    }
+
+                    @Override
+                    public void onRelease(int primaryCode) {
+
+                    }
+
+                    @Override
+                    public void onKey(int primaryCode, int[] keyCodes) {
+                        Log.e("New Kye", "onKey: " + primaryCode);
+
+                    }
+
+                    @Override
+                    public void onText(CharSequence text) {
+
+                    }
+
+                    @Override
+                    public void swipeLeft() {
+
+                    }
+
+                    @Override
+                    public void swipeRight() {
+
+                    }
+
+                    @Override
+                    public void swipeDown() {
+
+                    }
+
+                    @Override
+                    public void swipeUp() {
+
+                    }
+                });*/
+
 //                if (!popupWindow.isShowing()) {
 //
 //                    popupWindow.setHeight((int) (keyboardHeight));
@@ -150,13 +198,18 @@ public class SimpleIME extends InputMethodService
 //                readEmoticons();
 //                enablePopUpView();
 //                checkKeyboardHeight(parent);
-            //   kv.setVisibility(View.GONE);
+                //   kv.setVisibility(View.GONE);
 
 //                if (isKeyBoardVisible) {
 //                    emojiKeyboard.setVisibility(LinearLayout.GONE);
 //                } else {
 
                 //  }
+
+                break;
+            case 57433:
+                Toast.makeText(SimpleIME.this, "click", Toast.LENGTH_SHORT).show();
+                SimpleIME.addText(mEmojiTexts[primaryCode], sIconIds[primaryCode]);
 
                 break;
             default:
@@ -206,7 +259,8 @@ public class SimpleIME extends InputMethodService
 
     }
 
-//    @Override
+
+    //    @Override
 //    public boolean onKeyDown(int keyCode, KeyEvent event) {
 //        if (popupWindow.isShowing()) {
 //            popupWindow.dismiss();
@@ -337,4 +391,32 @@ public class SimpleIME extends InputMethodService
 
 
     }
+
+    public static void addText(String emoji, int icon) {
+        ic.commitText(emoji, 1);
+
+//        for (int i = 0; i < recents.size(); i++) {
+//            if (recents.get(i).text.equals(emoji)) {
+//                dataSource.updateRecent(icon + "");
+//                recents.get(i).count++;
+//                return;
+//            }
+//        }
+//
+//        Recent recent = dataSource.createRecent(emoji, icon + "");
+//
+//        if (recent != null) {
+//            recents.add(recent);
+//        }
+    }
+
+    public static final String[] mEmojiTexts = {
+            // People
+            "\u263A", "\u263A", "\u263A", "\u263A"
+    };
+
+    private static final int[] sIconIds = {
+            // people
+            R.drawable.emoji_u263a, R.drawable.emoji_u263a, R.drawable.emoji_u263a, R.drawable.emoji_u263a
+    };
 }

@@ -6,4 +6,6 @@
     <dimen name="candidate_font_height">16.0sp</dimen>
     <dimen name="candidate_vertical_padding">6.0sp</dimen>
     <dimen name="keyboard_height">230dip</dimen>
+
+    <dimen name="divider_padding">12dp</dimen>
 </resources>
